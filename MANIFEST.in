@@ -1,0 +1,2 @@
+recursive-include contents/*
+recursive-include templates/*
