@@ -9,7 +9,7 @@ with open('LICENSE') as f:
 
 setup(
     name='rikiri',
-    version='0.5',
+    version='0.6',
     description='Make github presentations like a boss',
     long_description=README,
     author='Sourcepirate',
