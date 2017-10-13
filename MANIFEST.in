@@ -1,2 +1,3 @@
 recursive-include rikiri/contents *
 recursive-include rikiri/templates *
+include LICENSE
