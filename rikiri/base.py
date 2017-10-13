@@ -3,10 +3,6 @@
 from yattag import SimpleDoc
 from jinja2 import Template
 
-MARKDOWN = 1
-RST = 2
-JINJA = 3
-
 DEFAULT_TEMPLATE = """
 <div class="reveal">
     <div class="slides">
