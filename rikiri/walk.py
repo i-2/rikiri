@@ -29,4 +29,3 @@ class Walker(object):
         for walker in self.walkers:
             for fp in walker:
                 yield fp
-

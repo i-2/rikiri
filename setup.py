@@ -8,19 +8,27 @@ with open('LICENSE') as f:
     LICENSE = f.read()
 
 setup(
-    name='gleam',
+    name='rikiri',
     version='0.5',
     description='Make github presentations like a boss',
     long_description=README,
     author='Sourcepirate',
     author_email='plasmashadowx@gmail.com',
-    url='https://github.com/sourcepirate/gleam.git',
+    url='https://github.com/sourcepirate/rikiri.git',
     license=LICENSE,
     packages=find_packages(exclude=('tests', 'docs')),
+    include_package_data=True,
     install_requires=[
         "jinja2",
-        "yattag"
+        "yattag",
+        "six"
     ],
     test_suite='tests',
-    scripts=['bin/gleam']
+    classifiers=[
+          'License :: OSI Approved :: BSD License',
+          'Development Status :: 5 - Production/Stable',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Environment :: Console'],
+    scripts=['bin/rikiri']
 )

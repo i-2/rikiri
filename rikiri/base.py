@@ -1,6 +1,6 @@
 """ gleam.py """
 
-from yattag import Doc
+from yattag import SimpleDoc
 from jinja2 import Template
 
 MARKDOWN = 1
@@ -15,9 +15,19 @@ DEFAULT_TEMPLATE = """
 </div>
 """
 
+class HTMLDoc(SimpleDoc):
+    """Doc with html method"""
+    def html(self, *strgs):
+        for strg in strgs:
+            self._append(strg)
+
+    def taghtml(self):
+        return self, self.tag, self.html
+
+
 def get_doc(*args, **kwargs):
     """get the base document to be filled"""
-    return Doc(*args, **kwargs).tagtext()
+    return HTMLDoc().taghtml()
 
 def transform_attr(prefix):
     """Transform all attr to be named with some prefix"""
@@ -53,13 +63,13 @@ class Tag(object):
         return self
 
     def __str__(self):
-        doc, tag, text = get_doc(defaults=self._defaults)
+        doc, tag, html = get_doc(defaults=self._defaults)
         attrs_t = transform_attr(self._attr_prefix)
         args, atts = attrs_t(*self._attrs)
         with tag(self._tag, *args, **atts):
-            text(self._content)
+            html(self._content)
             for child in self.childs:
-                text(str(child))
+                html(str(child))
         return doc.getvalue()
 
 class Slides(object):
@@ -67,7 +77,7 @@ class Slides(object):
     def __init__(self, slides=None):
         self.slides = slides or []
   
-    def __add__(self, other):
+    def add(self, other):
         self.slides.append(other)
 
     def __str__(self):

@@ -32,6 +32,5 @@ def get_file_node(_path):
     print(_path)
     name = path.basename(_path)
     if ".md" in name:
-        print("Got mark down file : {}".format(name))
         return MarkdownFile(name, _path)
     return

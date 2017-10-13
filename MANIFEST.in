@@ -1,2 +1,2 @@
-recursive-include contents/*
-recursive-include templates/*
+recursive-include rikiri/contents *
+recursive-include rikiri/templates *

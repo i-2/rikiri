@@ -1,6 +1,8 @@
 """render the file accordingly"""
 
 import os
+import sys
+import six
 import shutil
 import os.path as path
 from jinja2 import Template
@@ -16,12 +18,14 @@ def convert_absolute(output_dir):
 def copy_contents(output_dir):
     """copy the contents to output directory"""
     output_dir = convert_absolute(output_dir)
-    shutil.copytree(path.join(path.dirname(__file__), "../contents"), output_dir)
+    if path.exists(output_dir):
+        shutil.rmtree(output_dir)
+    shutil.copytree(path.join(path.dirname(__file__), "contents"), output_dir)
     return None
 
 def copy_template(output_dir, **kwargs):
     """copy the template file to output directory"""
-    path_template = path.join(path.dirname(__file__), "../templates/index.jinja2")
+    path_template = path.join(path.dirname(__file__), "templates/index.jinja2")
     output_file = path.join(convert_absolute(output_dir), "index.html")
     template = Template(open(path_template).read())
     fp = open(output_file, "w")
@@ -35,7 +39,8 @@ def get_slides(source_dir):
     slides = Slides()
     for file in walker:
         file_node = get_file_node(file)
-        slides += file_node.frame
+        slides.add(file_node.frame)
+    six.print_("Done!")
     return slides
 
 def render(title, source_dir, target_dir):
