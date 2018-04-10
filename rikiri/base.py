@@ -110,7 +110,7 @@ class FileNode(object):
     @property
     def contents(self):
         fp = open(self.path, "r")
-        _contents = fp.read()
+        _contents = fp.read().decode('utf-8')
         fp.close()
         return _contents
 
